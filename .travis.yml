@@ -19,7 +19,7 @@ matrix:
         - bundle install
       script:
         - bundle exec danger
-        - set -o pipefail && xcodebuild test -workspace ViaSwiftUtils.xcworkspace -scheme ViaSwiftUtils_iOS -destination "$TEST_DESTINATION" | xcpretty
+        - set -o pipefail && xcodebuild test -workspace ViaSwiftUtils.xcworkspace -scheme ViaSwiftUtils_iOSTests -destination "$TEST_DESTINATION" | xcpretty
     - os: osx
       osx_image: xcode9.2
       sudo: required
@@ -28,6 +28,8 @@ matrix:
       install:
         - ./install_swiftlint.sh
         - bundle install
+      script:
+        - set -o pipefail && xcodebuild test -workspace ViaSwiftUtils.xcworkspace -scheme ViaSwiftUtils_iOSTests -destination "$TEST_DESTINATION" | xcpretty
 
 
 cache: bundler
